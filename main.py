@@ -25,7 +25,7 @@ def parse_cookies(filename):
     for cookie in data:
         cookies[cookie["name"]] = cookie["value"]
 
-
+# get current status
 def get_status():
     try:
         response = requests.get('https://hk4e-api-os.mihoyo.com/event/sol/info',
@@ -49,7 +49,7 @@ def claim_daily():
         print(e)
         return
 
-
+# telegram bot to send notification
 def telegram_bot_send(bot_message, chat_id):
     bot_token = os.environ['TOKEN']
     bot_chat_id = chat_id
@@ -59,7 +59,7 @@ def telegram_bot_send(bot_message, chat_id):
     response = requests.get(send_text)
     return response.json()
 
-
+# main function lambda handler
 def main(event, context):
     for cookie in [{"cookie": "cookie.json", "chat_id": "chat_id"}, {"cookie": "cookie.json", "chat_id": "chat_id"}]:
         parse_cookies(cookie["cookie"])
